@@ -163,7 +163,7 @@ The final version of the binary search algorithm ensures:
 
 Understanding the following terms is crucial for analyzing and designing algorithms effectively.
 
-### 3.1 Specification
+### 3.1 Problem Specification
 
 - **Standard Specification**:
   - **Returns** the element if it is in the array.

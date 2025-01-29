@@ -130,11 +130,33 @@ int FindPeak(A, begin, end)
 ##### **Key Properties and Invariants**
 
 1. **Existence of a Peak in the Search Range**:
-   - **Invariant**: At any recursive step, there exists at least one peak within the current search range `[begin, end]`.
-   - **Justification**:
-     - If `A[mid + 1] > A[mid]`, a peak must exist in the right half.
-     - If `A[mid - 1] > A[mid]`, a peak must exist in the left half.
-     - If neither is true, `A[mid]` itself is a peak.
+  - **Invariant**: At any recursive step, there exists at least one peak within the current search range `[begin, end]`.
+  - **Justification**:
+    1. **If `A[mid + 1] > A[mid]`, a peak must exist in the right half.**
+    - **Assumption**: Suppose, for contradiction, that there is **no peak** in the right half of the array `[mid + 1, end]`.
+    - **Given**: `A[mid] < A[mid + 1]`.
+    - **Implications**:
+      - Since there is no peak in the right half, every element must be increasing. Therefore:
+        $
+        A[mid + 1] < A[mid + 2] < A[mid + 3] < \dots < A[end]
+        $
+      - This sequence must eventually terminate at the last element `A[end]`.
+      - **Conclusion**: `A[end]` is greater than its left neighbor `A[end - 1]` (i.e., `A[end - 1] < A[end]`), making `A[end]` a **peak**.
+      - **Contradiction**: Our assumption that there is no peak in the right half leads to the conclusion that `A[end]` is a peak, which contradicts the assumption.
+      - **Therefore**: A peak **must** exist in the right half.
+      
+    2. **If `A[mid - 1] > A[mid]`, a peak must exist in the left half.**
+    - **Assumption**: Suppose, for contradiction, that there is **no peak** in the left half of the array `[begin, mid - 1]`. 
+    - **Given**: `A[mid - 1] > A[mid]`.
+    - **Implications**:
+      - Since there is no peak in the left half, every element must be decreasing when moving towards `mid - 1`. Therefore:
+        $
+        A[begin] > A[begin + 1] > \dots > A[mid - 1]
+        $
+      - This sequence must start from the first element `A[begin]`.
+      - **Conclusion**: `A[begin]` is greater than its left neighbor `A[begin - 1]` (assuming $A[0] = -\infty$), making `A[begin]` a **peak**.
+      - **Contradiction**: Our assumption that there is no peak in the left half leads to the conclusion that `A[begin]` is a peak, which contradicts the assumption.
+      - **Therefore**: A peak **must** exist in the left half.
 
 2. **Loop Invariant**:
    - The algorithm maintains that there is always a peak within the current search boundaries.
@@ -143,34 +165,6 @@ int FindPeak(A, begin, end)
 3. **Correctness through Induction**:
    - **Base Case**: An array of size 1 (`begin == end`) trivially contains a peak.
    - **Inductive Step**: Assume the algorithm correctly finds a peak for arrays smaller than size `n`. For an array of size `n`, the algorithm reduces the problem to a subarray where a peak must exist, thereby maintaining correctness.
-
-##### **Explanation of Efficiency**
-
-- **Time Complexity Analysis**:
-  
-  The algorithm divides the search space by half in each recursive call, similar to binary search.
-
-  $$
-  T(n) = T\left(\frac{n}{2}\right) + \Theta(1)
-  $$
-
-  - **Unrolling the Recurrence**:
-
-    $
-    T(n) = T\left(\frac{n}{2}\right) + \Theta(1) \\
-    = T\left(\frac{n}{4}\right) + \Theta(1) + \Theta(1) \\
-    = T\left(\frac{n}{8}\right) + \Theta(1) + \Theta(1) + \Theta(1) \\
-    \vdots \\
-    = T(1) + \Theta(\log n) \\
-    = \Theta(\log n)
-    $
-
-  - **Conclusion**: The running time of the Reduce-and-Conquer Peak Finding algorithm is $O(\log n)$, making it significantly more efficient than the linear scan method.
-
-- **Space Complexity**:
-  
-  - **Iterative Implementation**: $O(1)$, as it uses a constant amount of additional space.
-  - **Recursive Implementation**: $O(\log n)$, due to the recursion stack.
 
 ##### **Illustrative Example**
 
@@ -238,10 +232,10 @@ $$
    
 3. **Conclusion**:
    - By induction, the algorithm correctly finds a peak for any array of size `n`.
+   
+##### **Explanation of Efficiency**
 
-##### **Running Time Analysis**
-
-- **Recurrence Relation**:
+- **Running Time Analysis**:
   $$
   T(n) = T\left(\frac{n}{2}\right) + \Theta(1)
   $$
@@ -264,101 +258,13 @@ $$
     $$
     T(n) = O(\log n)
     $$
+
+The running time of the Reduce-and-Conquer Peak Finding algorithm is $O(\log n)$, making it significantly more efficient than the linear scan method.
+
+- **Space Complexity**:
   
-  - The algorithm efficiently reduces the search space logarithmically, ensuring a fast peak finding process even for large arrays.
-
-##### **Illustrative Example**
-
-Consider the array indexed from 1 to 12:
-
-$$
-A = [2, 4, 9, 2, 11, 12, 13, 14, 15, 18, 17, 5]
-$$
-
-1. **First Call**: `FindPeak(A, 1, 12)`
-   - `mid = 1 + (12 - 1) / 2 = 6`
-   - `A[6] = 12`
-   - Compare with neighbors: `A[5] = 11` and `A[7] = 13`
-   - Since `A[7] > A[6]`, recurse on the right half: `FindPeak(A, 7, 12)`
-
-2. **Second Call**: `FindPeak(A, 7, 12)`
-   - `mid = 7 + (12 - 7) / 2 = 9`
-   - `A[9] = 15`
-   - Compare with neighbors: `A[8] = 14` and `A[10] = 18`
-   - Since `A[10] > A[9]`, recurse on the right half: `FindPeak(A, 10, 12)`
-
-3. **Third Call**: `FindPeak(A, 10, 12)`
-   - `mid = 10 + (12 - 10) / 2 = 11`
-   - `A[11] = 17`
-   - Compare with neighbors: `A[10] = 18` and `A[12] = 5`
-   - Since `A[10] > A[11]`, recurse on the left half: `FindPeak(A, 10, 10)`
-
-4. **Fourth Call**: `FindPeak(A, 10, 10)`
-   - `begin = end = 10`
-   - `A[10] = 18` is a peak (since `A[9] = 15` and `A[11] = 17`)
-   - **Return**: `10`
-
-- **Result**: The algorithm correctly identifies `A[10] = 18` as a peak.
-
-##### **Handling Potential Issues**
-
-- **Missing Else Condition**:
-  
-  Initially, the algorithm appeared to miss an `else` condition. However, by structuring the conditional checks appropriately, the algorithm ensures that if neither neighbor is greater, the current middle element is a peak. This implicit handling negates the need for an explicit `else` clause.
-
-- **Edge Cases**:
-  
-  - **All Elements Equal**:
-    - Example: `[7, 7, 7, 7, 7]`
-    - **Behavior**: The algorithm will identify the middle element as a peak since it is not less than its neighbors.
-  
-  - **Strictly Increasing or Decreasing Arrays**:
-    - Example (Increasing): `[1, 2, 3, 4, 5]`
-      - **Peak**: The last element (`5`) is a peak.
-    - Example (Decreasing): `[5, 4, 3, 2, 1]`
-      - **Peak**: The first element (`5`) is a peak.
-
-##### **Formal Correctness Proof**
-
-1. **Base Case**:
-   - For an array of size 1 (`begin == end`), the single element is trivially a peak.
-   
-2. **Inductive Step**:
-   - Assume the algorithm correctly finds a peak for arrays of size less than `n`.
-   - For an array of size `n`, the algorithm examines the middle element.
-     - If the middle element is a peak, it returns immediately.
-     - If the right neighbor is greater, a peak must exist in the right half.
-     - If the left neighbor is greater, a peak must exist in the left half.
-   - By the inductive hypothesis, the recursive call on the selected half correctly identifies a peak.
-   
-3. **Conclusion**:
-   - By induction, the algorithm correctly finds a peak for any array of size `n`.
-
-##### **Running Time Analysis**
-
-- **Recurrence Relation**:
-  $$
-  T(n) = T\left(\frac{n}{2}\right) + \Theta(1)
-  $$
-  - **Explanation**:
-    - **$T\left(\frac{n}{2}\right)$**: Time for the recursive call on half the array.
-    - **$\Theta(1)$**: Constant time for comparing the middle element with its neighbors.
-
-- **Solving the Recurrence**:
-  - **Unrolling**:
-
-    $
-    T(n) = T\left(\frac{n}{2}\right) + \Theta(1) \\
-    = T\left(\frac{n}{4}\right) + \Theta(1) + \Theta(1) \\
-    = T\left(\frac{n}{8}\right) + \Theta(1) + \Theta(1) + \Theta(1) \\
-    \vdots \\
-    = T(1) + \Theta(\log n)
-    $
-  
-  - **Conclusion**: 
-    $$
-    T(n) = O(\log n)
-    $$
+  - **Iterative Implementation**: $O(1)$, as it uses a constant amount of additional space.
+  - **Recursive Implementation**: $O(\log n)$, due to the recursion stack.
   
   - The algorithm efficiently reduces the search space logarithmically, ensuring a fast peak finding process even for large arrays.
 
@@ -580,25 +486,6 @@ int FindMaxRow(A, n, j)
   - **Finding peaks in log m columns**: $O(n \log m)$
   - **Finding the maximum in each selected column**: $O(n)$ per column
   - **Total**: $O(n \log m)$
-
----
-
-### 3.3. Insights and Best Practices
-
-- **Invariant Maintenance**:
-  - Maintaining **loop invariants** is crucial for proving algorithm correctness and ensuring that each iteration progresses towards finding a peak.
-  
-- **Algorithm Refinement**:
-  - Iteratively identifying and fixing bugs enhances both the **correctness** and **efficiency** of algorithms.
-  
-- **Handling Edge Cases**:
-  - Always consider edge cases, such as arrays with uniform values or minimal sizes, to ensure algorithm robustness.
-  
-- **Monotonic Functions and Binary Search**:
-  - Binary search principles can be extended to solve optimization problems beyond simple searches, particularly those involving **monotonic relationships**.
-  
-- **Greedy Algorithms**:
-  - Combining binary search with **greedy strategies** can lead to efficient solutions in allocation and optimization tasks, as seen in the tutorial allocation example.
 
 ---
 
