@@ -1,5 +1,41 @@
 # Lecture 4: Peak Finding
 
+# Table of Contents
+
+- [1. Introduction](#1-introduction)
+  - [Global vs. Local Maximums](#global-vs-local-maximums)
+  - [Why Local Maximums?](#why-local-maximums?)
+- [2. 1-Dimensional (1D) Peak Finding](#2-1-dimensional-1d-peak-finding)
+  - [2.1. Definitions](#21-definitions)
+    - [Global Maximum](#global-maximum)
+      - [Pseudocode: FindMax](#pseudocode-findmax)
+    - [Local Maximum (Peak)](#local-maximum-peak)
+  - [2.2. Peak Finding Algorithms](#22-peak-finding-algorithms)
+    - [Algorithm 1: Simple Linear Scan](#algorithm-1-simple-linear-scan)
+    - [Algorithm 2: Reduce-and-Conquer Strategy](#algorithm-2-reduce-and-conquer-strategy)
+      - [How the Algorithm Works](#how-the-algorithm-works)
+      - [Key Properties and Invariants](#key-properties-and-invariants)
+      - [Illustrative Example](#illustrative-example)
+      - [Handling Potential Issues](#handling-potential-issues)
+      - [Formal Correctness Proof](#formal-correctness-proof)
+      - [Explanation of Efficiency](#explanation-of-efficiency)
+  - [2.3. Steep Peaks](#23-steep-peaks)
+    - [Problematic Example](#problematic-example)
+    - [Algorithmic Implications](#algorithmic-implications)
+- [3. 2-Dimensional (2D) Peak Finding](#3-2-dimensional-2d-peak-finding)
+  - [3.1. Definitions](#31-definitions)
+    - [2D Peak](#2d-peak)
+  - [3.2. Peak Finding Algorithms](#32-peak-finding-algorithms)
+    - [Algorithm 1: Column-Wise Global Maximum](#algorithm-1-column-wise-global-maximum)
+    - [Algorithm 2: Column-Wise Local Peaks](#algorithm-2-column-wise-local-peaks)
+      - [Counter-Example](#counter-example)
+    - [Algorithm 3: Optimized 2D Peak Finding](#algorithm-3-optimized-2d-peak-finding)
+- [4. Conclusion](#4-conclusion)
+  - [Summary of Key Points](#summary-of-key-points)
+  - [Practical Applications](#practical-applications)
+  - [Final Thoughts](#final-thoughts)
+
+---
 ## 1. Introduction
 
 In optimization and search problems, identifying optimal points within data structures is crucial. **Peak Finding** is a fundamental concept in computer science that focuses on locating elements in arrays that are greater than or equal to their neighbors. This lecture explores both **One-Dimensional (1D)** and **Two-Dimensional (2D)** peak finding, examining algorithms that employ strategies similar to binary search to achieve efficient results.
