@@ -220,7 +220,7 @@ Understanding the following terms is crucial for analyzing and designing algorit
   
 - **Analysis**:
   $$
-  (\text{end} - \text{begin}) \leq \frac{n}{2^k} \quad \text{in iteration} \ k.
+  (\text{end} - \text{begin}) \leq \frac{n}{2^k} \quad \text{in iteration } k.
   $$
   
   - **Iteration Breakdown**:
@@ -232,8 +232,39 @@ Understanding the following terms is crucial for analyzing and designing algorit
   
   - **Termination Condition**:
     $$
-    \frac{n}{2^k} = 1 \implies k = \log(n)
+    \frac{n}{2^k} = 1 \implies k = \log n
     $$
+  
+- **Recurrence Relation Analysis**:
+
+  The binary search algorithm reduces its search space by half at each iteration and performs a constant amount of work per iteration. This behavior can be modeled by the recurrence relation:
+  
+  $$
+  T(n) = T\left(\frac{n}{2}\right) + c,
+  $$
+  
+  where:
+  - $T(n)$ is the total time to search an array of size $n$.
+  - $T\left(\frac{n}{2}\right)$ is the time to search in half of the array.
+  - $c$ is a constant representing the time for the comparison(s) and pointer updates in each iteration.
+  
+  **Unrolling the Recurrence**:
+  
+  $$
+  \begin{aligned}
+  T(n) &= T\left(\frac{n}{2}\right) + c \\
+       &= T\left(\frac{n}{4}\right) + c + c \\
+       &= T\left(\frac{n}{8}\right) + c + c + c \\
+       &\;\;\vdots \\
+       &= T(1) + c \cdot \log n.
+  \end{aligned}
+  $$
+  
+  Since $T(1)$ is a constant (say $T(1)=d$), we obtain:
+  
+  $$
+  T(n) = d + c \cdot \log n = \Theta(\log n).
+  $$
   
 - **Time Complexity**:
   $$
@@ -242,7 +273,7 @@ Understanding the following terms is crucial for analyzing and designing algorit
   
 - **Space Complexity**:
   - **Iterative Implementation**: $O(1)$ (constant space).
-  - **Recursive Implementation**: $O(\log n)$ (due to recursion stack).
+  - **Recursive Implementation**: $O(\log n)$ (due to the recursion stack).
 
 ---
 
