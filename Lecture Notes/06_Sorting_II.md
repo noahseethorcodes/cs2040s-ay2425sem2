@@ -6,7 +6,7 @@
 - [Part 1: MergeSort and Space Complexity Analysis](#part-1-mergesort-and-space-complexity-analysis)
   - [1. Introduction to MergeSort](#1-introduction-to-mergesort)
     - [Divide-and-Conquer Overview](#divide-and-conquer-overview)
-    - [Recursive Definition & Pseudocode](#recursive-definition-&-pseudocode)
+    - [Recursive Definition & Pseudocode](#recursive-definition--pseudocode)
   - [2. Space Complexity of MergeSort](#2-space-complexity-of-mergesort)
     - [Temporary Arrays and Recurrence](#temporary-arrays-and-recurrence)
     - [Diagrammatic Explanation](#diagrammatic-explanation)
