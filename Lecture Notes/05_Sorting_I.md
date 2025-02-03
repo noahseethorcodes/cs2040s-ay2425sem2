@@ -1,4 +1,4 @@
-## 1. Introduction
+# Lecture 5: Sorting I
 
 # Table of Contents
 
@@ -35,6 +35,8 @@
     - [Final Thoughts](#final-thoughts)
 
 ---
+## 1. Introduction
+
 Sorting is a fundamental concept in computer science that involves arranging elements in a specific order. The goal of sorting is to take an unsorted array and produce a sorted array such that the elements appear in non-decreasing order.
 
 **Problem Definition**:  
