@@ -1,6 +1,5 @@
 # Lecture 6: Sorting II
 
-
 # Table of Contents
 
 - [Part 1: MergeSort and Space Complexity Analysis](#part-1-mergesort-and-space-complexity-analysis)

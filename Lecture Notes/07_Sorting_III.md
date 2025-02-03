@@ -1,8 +1,5 @@
 # Lecture 7: Sorting III
 
-These lecture notes provide an in-depth exploration of QuickSort with a strong mathematical focus. We examine partitioning strategies, pivot selection, recurrence relations, and randomized analysis to understand both the best-case and worst-case performance of QuickSort. Additionally, we cover specialized topics such as handling duplicates, order statistics, and improved randomization techniques.
-
-
 # Table of Contents
 
 - [1. Introduction to Advanced QuickSort Analysis](#1-introduction-to-advanced-quicksort-analysis)
