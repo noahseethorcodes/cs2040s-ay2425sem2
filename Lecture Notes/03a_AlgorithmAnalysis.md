@@ -73,17 +73,17 @@ A common way to visualize this is with a diagram plotting $T(n)$ alongside $c \c
 - **Factorial Time**: $O(n!)$
 
 ### 2.4 Other Asymptotic Notations
-- **Big-$\Omega$** (Lower Bound)  
+- **$Big-\Omega$** (Lower Bound)  
   $T(n) = \Omega\bigl(f(n)\bigr)$ if $T(n)$ grows at least as fast as $f(n)$, for sufficiently large $n$.
-- **Big-$\Theta$** (Tight Bound)  
-  $T(n) = \Theta\bigl(f(n)\bigr) $ if $T(n)$ is both $O\bigl(f(n)\bigr)$ and $\Omega\bigl(f(n)\bigr)$. This indicates $T(n)$ grows *exactly* at the same rate as $f(n)$ (up to constant factors).
+- **$Big-\Theta$** (Tight Bound)  
+  $T(n) = \Theta\bigl(f(n)\bigr)$ if $T(n)$ is both $O\bigl(f(n)\bigr)$ and $\Omega\bigl(f(n)\bigr)$. This indicates $T(n)$ grows *exactly* at the same rate as $f(n)$ (up to constant factors).
 
 ---
 
 ## 3. Big-Omega Notation (Lower Bound)
 
 ### 3.1 Formal Definition
-**Big-$\Omega$ notation** provides a **lower bound** on the growth rate of a function. Formally, if $T(n)$ represents the running time of an algorithm, then
+**$Big-\Omega$ notation** provides a **lower bound** on the growth rate of a function. Formally, if $T(n)$ represents the running time of an algorithm, then
 
 $$
 T(n) = \Omega\bigl(f(n)\bigr)\quad \text{if and only if} \quad 
@@ -132,8 +132,8 @@ In simpler terms:
 ### 4.2 Visualization
 Imagine plotting $T(n)$ and $f(n)$ on a graph:
 - **Big-O** ensures $T(n)$ does not exceed $c \cdot f(n)$ for $n \ge n_0$.
-- **Big-$\Omega$** ensures $T(n)$ is not below $k \cdot f(n)$ for $n \ge m_0$.
-- **Big-$\Theta$** means $T(n)$ is sandwiched between $k \cdot f(n)$ and $c \cdot f(n)$ for sufficiently large $n$.
+- **$Big-\Omega$** ensures $T(n)$ is not below $k \cdot f(n)$ for $n \ge m_0$.
+- **$Big-\Theta$** means $T(n)$ is sandwiched between $k \cdot f(n)$ and $c \cdot f(n)$ for sufficiently large $n$.
 
 > **Diagram Description**:  
 > A simple diagram would show two lines representing $T(n)$ and $f(n)$, with shaded regions indicating the bounds set by $c \cdot f(n)$ and $k \cdot f(n)$. $T(n)$ remains within these bounds for all $n \ge n_0$.
@@ -142,68 +142,55 @@ Imagine plotting $T(n)$ and $f(n)$ on a graph:
 
 1. **Polynomial Degree Rule**
    - **Rule**: If $T(n)$ is a polynomial of degree $k$, then:
-     $
-     T(n) = O(n^k)
-     $
+
+     $T(n) = O(n^k)$
    - **Example**:
-     $
-     10n^5 + 50n^3 + 10n + 17 = O(n^5)
-     $
+
+     $10n^5 + 50n^3 + 10n + 17 = O(n^5)$
 
 2. **Addition Rule**
    - **Rule**: If $T(n) = O(f(n))$ and $S(n) = O(g(n))$, then:
-     $
-     T(n) + S(n) = O(f(n) + g(n))
-     $
+
+     $T(n) + S(n) = O(f(n) + g(n))$
    - **Example**:
-     $
-     10n^2 = O(n^2)
-     $
-     $
-     5n\log(n) = O(n\log(n))
-     $
-     $
-     10n^2 + 5n\log(n) = O(n^2 + n\log(n)) = O(n^2)
-     $
+   - 
+     $10n^2 = O(n^2)$
+     
+     $5n\log(n) = O(n\log(n))$
+     
+     $10n^2 + 5n\log(n) = O(n^2 + n\log(n)) = O(n^2)$
 
 3. **Multiplication Rule**
    - **Rule**: If $T(n) = O(f(n))$ and $S(n) = O(g(n))$, then:
-     $
-     T(n) \times S(n) = O(f(n) \times g(n))
-     $
+
+     $T(n) \times S(n) = O(f(n) \times g(n))$
    - **Example**:
-     $
-     10n^2 = O(n^2)
-     $
-     $
-     5n = O(n)
-     $
-     $
-     (10n^2)(5n) = 50n^3 = O(n^2 \times n) = O(n^3)
-     $
+
+     $10n^2 = O(n^2)$
+     
+     $5n = O(n)$
+     
+     $(10n^2)(5n) = 50n^3 = O(n^2 \times n) = O(n^3)$
 
 ### 4.4 Additional Examples
 
 1. **Exponential Growth Example**
    - **Statement**:
-     $
-     22n + 2n + 2 = O(2^{2n})
-     $
+
+     $22n + 2n + 2 = O(2^{2n})$
    - **Explanation**: Although the polynomial $22n + 2n + 2$ grows exponentially relative to $2^{2n}$, it is still bounded above by $O(2^{2n})$. However, it's more precise to classify it as $O(n)$ since exponential functions grow much faster.
 
 2. **Logarithmic Factorial Example**
    - **Statement**:
-     $
-     \log(n!) = O(n \log n)
-     $
+
+     $\log(n!) = O(n \log n)$
    - **Explanation**: Using Stirling's approximation:
-     $
-     n! \approx n^n e^{-n} \sqrt{2\pi n}
-     $
+
+     $n! \approx n^n e^{-n} \sqrt{2\pi n}$
+     
      Taking the logarithm:
-     $
-     \log(n!) \approx n \log n - n + \frac{1}{2} \log(2\pi n) = O(n \log n)
-     $
+
+     $\log(n!) \approx n \log n - n + \frac{1}{2} \log(2\pi n) = O(n \log n)$
 
 ---
 
@@ -345,20 +332,16 @@ An alternative view is to explicitly **count the number of operations** (like co
   - **Running Time Analysis**:
     - Let $T(n)$ be the running time.
     - **Recurrence Relation**:
-      $
-      T(n) = 1 + T(n - 1) + T(n - 2)
-      $
+      $$T(n) = 1 + T(n - 1) + T(n - 2)$$
     - **Solution**:
-      $
-      T(n) = O(2^n)
-      $
+      $$T(n) = O(2^n)$$
 
 - **Explanation/Insight on Recurrence Relations**:
   - **Recurrence Relations** are equations that define a function in terms of its values on smaller inputs.
   - **Techniques to Solve Recurrences**:
     - **Substitution Method**: Guess the form of the solution and use mathematical induction to prove it.
     - **Recursion Tree Method**: Visualize the recurrence as a tree and sum the costs at each level.
-    - **Master Theorem**: Provides a shortcut to solve recurrences of the form $T(n) = aT\left(\frac{n}{b}\right) + f(n)$.
+    - **Master Theorem**: Provides a shortcut to solve recurrences of the form $T(n) = aT\left(\frac{n}{b}\right) + f(n)$
   - **Insight**:
     - The Fibonacci example showcases how exponential growth arises from multiple recursive calls.
     - Optimizing recursive algorithms (e.g., using memoization or dynamic programming) can significantly reduce time complexity by avoiding redundant computations.
@@ -369,14 +352,14 @@ An alternative view is to explicitly **count the number of operations** (like co
 
 When analyzing an algorithm, consider:
 1. **Upper Bounds (Big-O)**: How fast can $T(n)$ grow?  
-2. **Lower Bounds (Big-$\Omega$)**: How slow can $T(n)$ grow?  
-3. **Tight Bounds (Big-$\Theta$)**: If both bounds match, we have a complete picture of $T(n)$.
+2. **Lower Bounds ($Big-\Omega$)**: How slow can $T(n)$ grow?  
+3. **Tight Bounds ($Big-\Theta$)**: If both bounds match, we have a complete picture of $T(n)$.
 
 ### Steps for Analysis
 1. **Identify the basic operations.**
 2. **Count how many times** those operations occur as a function of $n$ (the input size).
 3. **Express this count** in asymptotic notation (commonly Big-O).
-4. **(Optionally) Provide Big-$\Theta$ or Big-$\Omega$** to indicate tighter or lower bounds if relevant.
+4. **(Optionally) Provide $Big-\Theta$ or $Big-\Omega$** to indicate tighter or lower bounds if relevant.
 
 > **Tips**:  
 > Typical patterns to look for:
@@ -389,19 +372,13 @@ When analyzing an algorithm, consider:
 ## 8. Summary
 
 - **Big-O**: Upper bound on growth.  
-  $
-  T(n) = O\bigl(f(n)\bigr) \iff \exists\, c > 0, n_0 > 0 \text{ s.t. } T(n) \le c\cdot f(n) \text{ for all } n \ge n_0.
-  $
+  $$T(n) = O\bigl(f(n)\bigr) \iff \exists\, c > 0, n_0 > 0 \text{ s.t. } T(n) \le c\cdot f(n) \text{ for all } n \ge n_0.$$
 
-- **Big-$\Omega$**: Lower bound on growth.  
-  $
-  T(n) = \Omega\bigl(f(n)\bigr) \iff \exists\, c > 0, n_0 > 0 \text{ s.t. } T(n) \ge c\cdot f(n) \text{ for all } n \ge n_0.
-  $
+- **$Big-\Omega$**: Lower bound on growth.  
+  $$T(n) = \Omega\bigl(f(n)\bigr) \iff \exists\, c > 0, n_0 > 0 \text{ s.t. } T(n) \ge c\cdot f(n) \text{ for all } n \ge n_0.$$
 
-- **Big-$\Theta$**: Tight bound (both upper and lower).  
-  $
-  T(n) = \Theta\bigl(f(n)\bigr) \iff T(n) = O(f(n)) \text{ and } T(n) = \Omega(f(n)).
-  $
+- **$Big-\Theta$**: Tight bound (both upper and lower).  
+  $$T(n) = \Theta\bigl(f(n)\bigr) \iff T(n) = O(f(n)) \text{ and } T(n) = \Omega(f(n)).$$
 
 - We use the **RAM model** for simplicity in counting operations.  
 - **Rules of Thumb**:
@@ -413,7 +390,7 @@ When analyzing an algorithm, consider:
   - $10n^5 + 50n^3 + 10n + 17 = O(n^5)$.
   - $10n^2 + 5n\log(n) = O(n^2)$.
   - $(10n^2)(5n) = O(n^3)$.
-  - $22n + 2n + 2 = O(2^{2n})$ (more precise as $O(n)$).
+  - $22n + 2n + 2 = O(2^{2n})$ (more precise as $O(n)$ ).
   - $\log(n!) = O(n \log n)$ (using Stirling's approximation).
 
 Understanding these definitions and notations lays the foundation for analyzing algorithmic efficiency throughout the course.
