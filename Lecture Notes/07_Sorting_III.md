@@ -235,9 +235,7 @@ ParanoidQuickSort(A[1..n], n)
 - The algorithm first checks if the array size is 1, in which case it is already sorted.
 - It then enters a **repeat loop** where it randomly selects a pivot and partitions the array.
 - The loop continues until the pivot’s final position `p` satisfies the condition:
-  $$
-  \frac{1}{10}n < p < \frac{9}{10}n,
-  $$
+  $$\frac{1}{10}n < p < \frac{9}{10}n,$$
   ensuring that the pivot divides the array into reasonably balanced subarrays.
 - Finally, QuickSort is applied recursively to the left and right subarrays.
 
@@ -249,9 +247,7 @@ ParanoidQuickSort(A[1..n], n)
   For an array of size 10, a pivot is considered "good" if its position is between 2 and 9. That gives 8 "good" positions out of 10 total.
   - The probability of choosing a good pivot is $p = \frac{8}{10}$.
   - Thus, the expected number of pivot choices needed is:
-    $$
-    E[\# \text{ choices}] = \frac{1}{p} = \frac{1}{8/10} = \frac{10}{8} < 2.
-    $$
+    $$E[\text{no, choices}] = \frac{1}{p} = \frac{1}{8/10} = \frac{10}{8} < 2$$
 
 This demonstrates that, in expectation, the **repeat loop** in Paranoid QuickSort is executed fewer than 2 times.
 
@@ -263,15 +259,11 @@ A brief recap of key probability concepts used in this analysis:
 
 Using these concepts, we see that since the expected number of pivot choices is constant (less than 2), the overall recurrence for QuickSort becomes:
 
-$$
-E[T(n)] = E[T(k)] + E[T(n - k)] + E[\# \text{ pivot choices}] \cdot n,
-$$
+$$E[T(n)] = E[T(k)] + E[T(n - k)] + E[\text{no. pivot choices}] \cdot n$$
 
 which simplifies to:
 
-$$
-E[T(n)] \leq E[T(k)] + E[T(n - k)] + 2n.
-$$
+$$E[T(n)] \leq E[T(k)] + E[T(n - k)] + 2n$$
 
 By solving this recurrence (similar to the balanced partition case), we obtain an expected running time of $O(n \log n)$.
 
